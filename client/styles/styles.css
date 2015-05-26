@@ -7,8 +7,9 @@ body {
 
 #main {
     width: 500px;
+    height: 1000px;
     margin: auto;
-    text-align: left;
+    text-align: center;
     background: white;
     padding: 50px 60px;
     border: solid #ddd;
@@ -82,3 +83,18 @@ form input[type=text] {
 .spinner img {
     padding: 10px;
 }
+#chats{
+  text-align: center;
+}
+#roomSelect{
+    float: right;
+    border: 5px solid black;
+    padding: 1px;
+}
+.friends{
+    float: left;
+    border: 5px solid black;
+    padding: 1px;
+    /*height: 200px;*/
+}
+
