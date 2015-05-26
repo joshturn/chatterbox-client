@@ -13,17 +13,22 @@ var app = {
       }
     })
   },
-  fetch : function(data){
+  fetch : function(){
     $.ajax({
       type: 'GET',
       url: "https://api.parse.com/1/classes/chatterbox",
+      // data: JSON.stringify(data),
+      // contentType: 'application/json',
       success: function(data){
-        $('.chats').append('<div>'+data.username+" : "+data.text)
-      }
-    })
+        app.clearMessages();
+        for (var i = 0; i < 10; i++) {
+        $('.chats').append('<div class =feedMessage>'+_.escape(data.results[i]['username'])+": "+_.escape(data.results[i]['text'])+'</div>');
+        }
+    }
+  })
   },
   clearMessages: function() {
-    $('.chats').remove();
+    $('.feedMessage').remove();
   },
   addMessage: function(message) {
     // var newChat = document.createElement('div');
@@ -59,9 +64,8 @@ $('#submit').on('click', function() {
     room: 'Home'
   }
   app.send(mail)
-  app.addMessage(mail)
 });
 
-
+setInterval(app.fetch, 2000);
 
 });
