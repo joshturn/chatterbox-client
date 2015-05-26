@@ -23,26 +23,43 @@ var app = {
     })
   },
   clearMessages: function() {
-    $('#chats').remove();
+    $('.chats').remove();
   },
   addMessage: function(message) {
     // var newChat = document.createElement('div');
     // newChat.text = message;
-    $('#chats').append("<div>" + message.text + "</div>");
+
+    $('.chats').append("<div>" + message.username+": " + message.text + "</div>");
   },
   addRoom: function(roomName) {
     $('#roomSelect').append("<div>" + roomName + "</div>")
   },
 };
 
+$(document).ready(function(){
 $('user').on('click', function() {
-    $('.friends').append("<div>" + this.username + "</div>")
+    $('#friends').append("<div>" + this.username + "</div>")
   });
 
-$('.friends').on('click', function() {
+$('#friends').on('click', function() {
   $(this).addClass('.friends')
 })
 
 var feed = function() {
   app.addMessage(app.fetch())
 }
+var userName = window.location.search.slice(10);
+
+$('#username').append(userName);
+
+$('#submit').on('click', function() {
+  var mail = {
+    text: userMessage.value,
+    username: userName,
+    room: 'Home'
+  }
+  app.send(mail)
+  app.addMessage(mail)
+});
+
+});
